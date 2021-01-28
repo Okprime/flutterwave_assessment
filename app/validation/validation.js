@@ -5,7 +5,7 @@ const rule = Joi.object({
     "string.base": `field should be a String`,
     "any.required": `field is required`
   }),
-  condition: Joi.string().messages({
+  condition: Joi.string().required().messages({
     "string.base": `condition should be a String`,
     "any.required": `condition is required`
   }),

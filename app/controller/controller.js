@@ -105,16 +105,16 @@ module.exports = {
 }, 
 
   async validateRule(req, res) {
-    const test = {
-      "rule": {
-        "field": 7,
-        "condition": "contains",
-        "condition_value": "rocinante"
-      },
-      "data": ["The Nauvoo", "The Razorback", "The Roci", "Tycho"]
-    }
+    // const test = {
+    //   "rule": {
+    //     "field": 7,
+    //     "condition": "contains",
+    //     "condition_value": "rocinante"
+    //   },
+    //   "data": ["The Nauvoo", "The Razorback", "The Roci", "Tycho"]
+    // }
     try {
-      const isValid = await this.isValidJSON(JSON.stringify(test))
+      const isValid = await this.isValidJSON(JSON.stringify(req.body))
       console.log('isValid', isValid);
 
       if (isValid === false) {

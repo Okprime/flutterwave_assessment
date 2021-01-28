@@ -6,7 +6,7 @@ const route = require('./app/route/route')
 const app = express();
 
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5000;
 const appName = "My Rule-Validation API";
 
 

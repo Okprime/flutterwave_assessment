@@ -1,5 +1,6 @@
 const Joi = require('joi');
 
+// use JOI t0 perfom the external validations
 const rule = Joi.object({
   field: Joi.string().required().messages({
     "string.base": `field should be a String`,

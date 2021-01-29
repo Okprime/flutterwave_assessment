@@ -1,18 +1,18 @@
-const { bodySchema } = require('../validation/validation')
+const { bodySchema } = require('../validation/validation');
 
-function doValidation (input) {
+function perfomValidation (input) {
   const { rule, data } = input
   if (!input.hasOwnProperty('rule')) {
     throw new Error('rule field is required')
-  }
+  };
   
   if (!input.hasOwnProperty('data')) {
-    throw new Error('data field is required')
-  }
+    throw new Error('data field is required');
+  };
   
-  const { field, condition, condition_value } = rule
+  const { field, condition, condition_value } = rule;
   
-  const fieldChunk = field.split('.')
+  const fieldChunk = field.split('.');
   
   let traversal = data
   let _data = {
@@ -20,9 +20,9 @@ function doValidation (input) {
       error: true,
       ...rule
     }
-  }
-  let message = ''
-  let error = false
+  };
+  let message = '';
+  let error = false;
   for (let i = 0; i < fieldChunk.length; i++) {
     const chunk = fieldChunk[i]
     if (!traversal.hasOwnProperty(chunk)) {
@@ -30,9 +30,9 @@ function doValidation (input) {
       message = `field ${ field } is missing from data.`
       _data = null
       break
-    }
+    };
     traversal = traversal[chunk]
-  }
+  };
   
   if (!error) {
     _data['validation']['field_value'] = traversal
@@ -84,7 +84,7 @@ function doValidation (input) {
         }
     }
     _data['validation']['error'] = error
-  }
+  };
   
   return {
     message,
@@ -105,16 +105,10 @@ module.exports = {
 }, 
 
   async validateRule(req, res) {
-    // const test = {
-    //   "rule": {
-    //     "field": 7,
-    //     "condition": "contains",
-    //     "condition_value": "rocinante"
-    //   },
-    //   "data": ["The Nauvoo", "The Razorback", "The Roci", "Tycho"]
-    // }
+    console.log('req.body', req.body);
+    
     try {
-      const isValid = await this.isValidJSON(JSON.stringify(req.body))
+      const isValid = await this.isValidJSON(JSON.stringify(req.body));
       console.log('isValid', isValid);
 
       if (isValid === false) {
@@ -127,7 +121,7 @@ module.exports = {
 
       await bodySchema.validateAsync(req.body);
 
-      const value = await doValidation(req.body)
+      const value = await perfomValidation(req.body);
       return res.status(value.status === 'error' ? 400 : 200 ).send({
         ...value
       })
@@ -140,4 +134,4 @@ module.exports = {
       })
     }
   }
-}
+};

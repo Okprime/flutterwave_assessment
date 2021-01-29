@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const route = require('./app/route/route')
-
+const route = require('./app/route/route');
 
 const app = express();
 
@@ -18,9 +17,9 @@ app.use((req, res, next) => {
 });
 
 app.use(cors());
-app.use(route)
+app.use(route);
 
-// Endpoint 1
+// base route
 
 app.get('/', (req, res) => {
   console.log('My Rule-Validation API');
